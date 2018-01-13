@@ -3,6 +3,7 @@ class DisjointElement(object):
         self.element = elem
         self.parent = elem
 
+
 class DisjointSet(object):
     def __init__(self, elements):
         self.lookup = {}
@@ -11,3 +12,9 @@ class DisjointSet(object):
             de = DisjointElement(e)
             self.lookup[e] = de
             self.set.append(de)
+
+    def find(self, e):
+        pass
+
+    def union(self, e1, e2):
+        pass
