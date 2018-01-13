@@ -15,12 +15,16 @@ class DisjointSet(object):
 
     def find(self, e):
         de = self.lookup[e]
-        return self.__find(de)
+        return self.__find(de, [])
 
-    def __find(self, de):
-        # Missing path compression
+    def __find(self, de, path):
         if de.parent != de:
-            return self.__find(de.parent)
+            path.append(de)
+            return self.__find(de.parent, path)
+
+        for e in path:
+            e.parent = de
+
         return de.element
 
     def union(self, e1, e2):
