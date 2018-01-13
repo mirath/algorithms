@@ -2,6 +2,7 @@ class DisjointElement(object):
     def __init__(self, elem):
         self.element = elem
         self.parent = self
+        self.rank = 0
 
 
 class DisjointSet(object):
@@ -15,7 +16,7 @@ class DisjointSet(object):
 
     def find(self, e):
         de = self.lookup[e]
-        return self.__find(de, [])
+        return self.__find(de, []).element
 
     def __find(self, de, path):
         if de.parent != de:
@@ -25,11 +26,12 @@ class DisjointSet(object):
         for e in path:
             e.parent = de
 
-        return de.element
+        return de
 
     def union(self, e1, e2):
-        de1 = self.lookup[e1]
-        de2 = self.lookup[e2]
+        de1 = self.__find(self.lookup[e1])
+        de2 = self.__find(self.lookup[e2])
+
 
         # Missing union by rank
         de1.parent = de2
