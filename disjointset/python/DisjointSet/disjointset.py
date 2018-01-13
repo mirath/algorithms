@@ -29,9 +29,13 @@ class DisjointSet(object):
         return de
 
     def union(self, e1, e2):
-        de1 = self.__find(self.lookup[e1])
-        de2 = self.__find(self.lookup[e2])
+        de1 = self.__find(self.lookup[e1], [])
+        de2 = self.__find(self.lookup[e2], [])
 
-
-        # Missing union by rank
-        de1.parent = de2
+        if de1.rank > de2.rank:
+            de2.parent = de1
+        elif de1.rank < de2.rank:
+            de1.parent = de2
+        else:
+            de2.parent = de1
+            de1.rank += 1
