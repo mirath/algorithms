@@ -4,3 +4,4 @@ hsout
 __pycache__
 \#*
 .\#*
+*.pyc
