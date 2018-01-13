@@ -1,7 +1,7 @@
 class DisjointElement(object):
     def __init__(self, elem):
         self.element = elem
-        self.parent = elem
+        self.parent = self
 
 
 class DisjointSet(object):
@@ -14,7 +14,18 @@ class DisjointSet(object):
             self.set.append(de)
 
     def find(self, e):
-        pass
+        de = self.lookup[e]
+        return self.__find(de)
+
+    def __find(self, de):
+        # Missing path compression
+        if de.parent != de:
+            return self.__find(de.parent)
+        return de.element
 
     def union(self, e1, e2):
-        pass
+        de1 = self.lookup[e1]
+        de2 = self.lookup[e2]
+
+        # Missing union by rank
+        de1.parent = de2
